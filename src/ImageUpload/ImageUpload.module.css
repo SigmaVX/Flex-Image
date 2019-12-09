@@ -1,0 +1,13 @@
+.uploadWrapper {
+  width: 90%;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid lightskyblue;
+  margin: 2rem;
+  box-sizing: border-box;
+}
+
+.errorText {
+  color: salmon;
+}
