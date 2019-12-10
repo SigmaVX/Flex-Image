@@ -9,21 +9,27 @@ const ImageUpload = props => {
   let preset = null;
   let ratio = null;
   switch (props.type) {
+    case "assets":
+      minHeight = null;
+      minWidth = null;
+      preset = "assets";
+      ratio = null;
+      disabled = false;
+      break;
     case "user-avatar":
     case "game-cover":
     case "clan-avatar":
-    case "game-system":
       minHeight = 400;
       minWidth = 400;
-      preset = "400-400-square";
+      preset = "400-400-pic";
       ratio = 1;
       disabled = false;
       break;
     case "game-jumbo":
     case "clan-jumbo":
-      minHeight = 1500;
-      minWidth = 500;
-      preset = "1500-500-wide";
+      minHeight = 500;
+      minWidth = 1500;
+      preset = "1500-500-pic";
       ratio = 3;
       disabled = false;
       break;
@@ -55,14 +61,34 @@ const ImageUpload = props => {
         showCompletedButton: true,
         croppingCoordinatesMode: "custom",
         multiple: false,
-        autoMinimize: true
+        autoMinimize: true,
+        showPoweredBy: false,
+        showAdvancedOptions: props.useAdvanced,
+        styles: {
+          palette: {
+            window: "#FFF",
+            windowBorder: "#90A0B3",
+            tabIcon: "#0E2F5A",
+            menuIcons: "#5A616A",
+            textDark: "#000000",
+            textLight: "#FFFFFF",
+            link: "#0078FF",
+            action: "#FF620C",
+            inactiveTabIcon: "#0E2F5A",
+            error: "#F44235",
+            inProgress: "#0078FF",
+            complete: "#20B832",
+            sourceBg: "#E4EBF1"
+          },
+          fonts: {
+            "'Cute Font', cursive":
+              "https://fonts.googleapis.com/css?family=Cute+Font"
+          }
+        }
       },
       (error, result) => {
         if (error) setErrorText(error.statusText);
-        if (!result)
-          setErrorText(
-            "Image Upload Error: Your Image Did Not Upload. Please Try again."
-          );
+        if (!result) setErrorText("Upload Error: Your Image Did Not Upload.");
         if (result && result.event === "success") {
           setErrorText("Image Uploaded");
           let updateStateItem = ratio === 1 ? "avatar" : "jumbo";
