@@ -48,7 +48,7 @@ const ImageUpload = props => {
         uploadPreset: preset,
         folder: props.type,
         clientAllowedFormats: ["gif", "png", "jpg", "jpeg", "svg"],
-        maxFileSize: 4000000,
+        maxFileSize: 4500000,
         minFileSize: 10000,
         minImageWidth: minWidth,
         minImageHeight: minHeight,
@@ -91,7 +91,8 @@ const ImageUpload = props => {
         if (!result) setErrorText("Upload Error: Your Image Did Not Upload.");
         if (result && result.event === "success") {
           setErrorText("Image Uploaded");
-          let updateStateItem = ratio === 1 ? "avatar" : "jumbo";
+          let updateStateItem =
+            props.type === "clan-avatar" ? "avatar" : "jumbo";
           props.returnPhotoURL(result.info.url, updateStateItem);
         }
       }

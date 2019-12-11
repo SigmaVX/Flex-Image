@@ -16,13 +16,14 @@ class App extends Component {
   returnPhotoURL = (photoUrl, type) => {
     console.log("Recieved Photo Callback: ", photoUrl, type);
     this.setState({ [type]: photoUrl });
+    console.log(this.state);
   };
 
   render() {
     return (
       <div className="App">
         <h1>Flex Image</h1>
-        <ImageUpload type="assets" returnPhotoURL={this.returnPhotoURL} />
+        <ImageUpload type="clan-avatar" returnPhotoURL={this.returnPhotoURL} />
         <FlexImage src={this.state.avatar} />
 
         <ImageUpload type="clan-jumbo" returnPhotoURL={this.returnPhotoURL} />
